@@ -1,0 +1,25 @@
+# Tenant: same vendor product, newer version, relabelled screens.
+# Capabilities recorded on acme replay here through these overrides —
+# no re-recording. Remove the aliases and replay still succeeds via the
+# structural fallbacks, but reports drift on every relabelled step.
+id: blueriver
+name: Blue River Community Bank
+product: corelink-teller
+version: 4.3.0
+base_url: http://127.0.0.1:8800/blueriver
+policy: default
+secrets:
+  corelink.username: CUA_SECRET_CORELINK_USERNAME
+  corelink.password: CUA_SECRET_CORELINK_PASSWORD
+
+# Recorded visible text -> this tenant's visible text (trailing ':' is ignored).
+label_aliases:
+  Member Search: Member Inquiry
+  Member ID: Member Number
+  Search: Lookup
+  Share Savings: Primary Savings
+  Open Sub-Account: Add Share
+  Continue: Next
+
+# Escape hatch when an alias isn't enough: replace one step's target outright.
+step_overrides: {}

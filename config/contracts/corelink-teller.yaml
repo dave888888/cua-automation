@@ -1,0 +1,41 @@
+# Workflow contracts for CoreLink Teller capabilities. Trusted, reviewed
+# configuration — owned by operations/risk, not produced by discovery.
+# First match on capability id wins; keep the catch-all last.
+product: corelink-teller
+contracts:
+  - id: corelink.member.read
+    applies_to: "corelink.member.savings_balance*"
+    description: Read a member's balance. Read-only, member identity must be shown on screen.
+    max_side_effects: read
+    allowed_actions: [navigate, click, fill, extract]
+    route_scope: ["/desk", "/mbr/find", "/mbr/result"]
+    required_inputs: [member_id]
+    identity_inputs: [member_id]
+    outputs:
+      savings_balance: {type: decimal}
+    checkpoint: identity_displayed
+    unattended: true
+
+  - id: corelink.member.open_share
+    applies_to: "corelink.member.open_share*"
+    description: Open one sub-account for one member; exactly one commit, confirmation must reflect it.
+    max_side_effects: irreversible
+    max_irreversible_steps: 1
+    allowed_actions: [navigate, click, fill, select, extract]
+    route_scope: ["/desk", "/mbr/find", "/mbr/result", "/mbr/*/share/*"]
+    required_inputs: [member_id, share_type, opening_deposit]
+    identity_inputs: [member_id]
+    outputs:
+      confirmation_number: {type: string}
+    checkpoint: identity_bound          # commit page does not display the member; the route binds it
+    must_confirm: [share_type]
+    irreversible_routes: ["/mbr/*/share/commit"]
+    approval_required: true
+    unattended: true                     # with an approved artifact + caller authorisation
+
+  - id: corelink.default
+    applies_to: "*"
+    description: Anything else is read-only, identity-bound and must be fully verified.
+    max_side_effects: read
+    checkpoint: identity_bound
+    unattended: false

@@ -1,0 +1,49 @@
+# Guardrail policy. Enforced in three places:
+#   1. network: every document/frame request outside origins+routes is aborted
+#   2. action:  every agent/replay action is checked before it executes
+#   3. risk:    irreversible actions need approval (discovery) or an approved
+#               capability + explicit caller authorisation (replay)
+id: default
+allowed_origins:
+  - http://127.0.0.1:8800
+  - http://localhost:8800
+allowed_routes:
+  - /*/login
+  - /*/desk
+  - /*/banner
+  - /*/nav
+  - /*/welcome
+  - /*/mbr/**
+denied_routes:
+  - /__*          # the mock's fault-injection control plane
+  - /*/admin
+allowed_actions: [navigate, click, fill, select, extract]
+denied_targets:
+  - '(?i)system admin'
+  - '(?i)sign off'
+  - '(?i)\b(delete|close account|wire|transfer funds)\b'
+  - '(?i)release hold|supervisor'   # supervisor-only actions: a human must do these
+irreversible_targets:
+  - '(?i)^(submit|post|commit|confirm|approve|transfer)\b'
+allow_point_fallback: false
+# Browser sandbox, shared by discovery, replay and the operator console.
+sandbox:
+  allowed_methods: [GET, HEAD, POST]
+  mutation_routes:            # the only paths a POST may target (legacy forms)
+    - /*/login
+    - /*/mbr/*/share/review
+    - /*/mbr/*/share/commit
+    - /*/mbr/hold/release     # human-only by denied_targets; must still reach the server
+  allow_popups: false
+  allow_downloads: false
+  block_service_workers: true
+# Who may claim an intervention (stand-in for an SSO group). Empty = nobody.
+operators: [ops.jdoe, ops.asmith]
+# Parameter values reach the model only as {{name}} symbols. Exposing a
+# pii/financial/secret value to the model needs this explicit opt-in.
+model_exposure:
+  allow_sensitive_values: false
+discovery:
+  max_steps: 30
+  max_no_progress: 3
+  max_wall_seconds: 600

@@ -1,0 +1,124 @@
+# Vendor app profile: knowledge about the CoreLink Teller *product*, shared by
+# every capability and every tenant that runs it. Detectors here are evaluated
+# on every step of every capability (capability-specific ones are added on top).
+product: corelink-teller
+description: CoreLink Teller core-banking front end (fictional vendor product).
+entry_route: /desk
+
+login:
+  route: /login
+  steps:
+    - id: s1
+      action: fill
+      intent: Enter the operator user ID
+      provenance: authored
+      target:
+        strategies:
+          - {kind: label, anchor: "User ID:", relation: next_control, role: textbox}
+          - {kind: css, selector: "input[name=u]"}
+      value: {secret: corelink.username}
+    - id: s2
+      action: fill
+      intent: Enter the operator password
+      provenance: authored
+      target:
+        sensitive: true
+        strategies:
+          - {kind: label, anchor: "Password:", relation: next_control, role: textbox}
+          - {kind: css, selector: "input[type=password]"}
+      value: {secret: corelink.password}
+    - id: s3
+      action: click
+      intent: Sign on
+      provenance: authored
+      target:
+        strategies:
+          - {kind: role, role: button, name: "Sign On"}
+          - {kind: css, selector: "input[type=submit]"}
+  success: {kind: url, route: /desk}
+
+authenticated: {kind: url, route: /desk}
+
+version_probe:
+  frame: [{name: banner}]
+  pattern: 'CoreLink Teller v([0-9.]+)'
+
+# Order matters: the first detector whose condition holds wins.
+detectors:
+  - id: system_notice
+    code: INTERSTITIAL
+    description: End-of-day system notice overlay that blocks the content frame.
+    when: {kind: text, pattern: 'SYSTEM NOTICE'}
+    classification: recoverable
+    recovery:
+      kind: dismiss
+      target:
+        frame: [{name: main}]
+        strategies:
+          - {kind: role, role: button, name: Acknowledge}
+          - {kind: css, selector: "input[value=Acknowledge]"}
+
+  - id: supervisor_hold
+    code: SUPERVISOR_HOLD
+    description: Teller drawer needs supervisor release. Policy forbids automation from releasing it.
+    when: {kind: text, pattern: 'SUPERVISOR HOLD|SUP-210'}
+    classification: requires_human
+
+  - id: session_expired
+    code: SESSION_EXPIRED
+    description: Session timed out or was invalidated server-side.
+    when: {kind: text, pattern: 'session has expired|CL-AUTH-440'}
+    classification: recoverable
+    recovery: {kind: restart_session, max_attempts: 1}
+
+  - id: signed_out
+    code: SESSION_EXPIRED
+    description: The whole window is back on the sign-on screen (session dropped).
+    when: {kind: url, route: /login}
+    classification: recoverable
+    recovery: {kind: restart_session, max_attempts: 1}
+
+  - id: processor_unavailable
+    code: APP_ERROR_TRANSIENT
+    description: Transaction processor briefly unavailable (TP-500). Vendor docs say retry.
+    when: {kind: text, pattern: 'TP-500|Transaction processor unavailable'}
+    classification: recoverable
+    recovery: {kind: restart_flow, max_attempts: 2, backoff_ms: 1500}
+
+  - id: access_denied
+    code: ACCESS_DENIED
+    description: The operator lacks privilege for this record or function.
+    when: {kind: text, pattern: 'ACCESS DENIED|SEC-403'}
+    classification: business_outcome
+    message_pattern: '(ACCESS DENIED[^()]*)'
+
+  - id: record_not_found
+    code: NOT_FOUND
+    description: No member record matches the search.
+    when: {kind: text, pattern: 'No member record matches'}
+    classification: business_outcome
+    message_pattern: '(No member record matches)'
+
+  - id: validation_error
+    code: VALIDATION_ERROR
+    description: The app rejected an input value (ERR nnnn).
+    when: {kind: text, pattern: 'ERR \d{4}:'}
+    classification: business_outcome
+    message_pattern: '(ERR \d{4}: [^\n]+)'
+
+  - id: login_rejected
+    code: AUTH_REJECTED
+    description: Credentials rejected — a configuration problem, not a business outcome.
+    when: {kind: text, pattern: 'CL-AUTH-401'}
+    classification: hard_failure
+
+sensitive_patterns:
+  ssn: '\b\d{3}-\d{2}-\d{4}\b'
+  money: '\$\s?\d[\d,]*\.\d{2}\b'
+
+# Values shown next to these labels are sensitive even though no pattern can
+# recognise them (a name). The surface registers them for redaction on sight.
+sensitive_labels:
+  "Member:": pii
+  "Account #:": pii
+  "SSN:": pii

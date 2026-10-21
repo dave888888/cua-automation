@@ -1,0 +1,10 @@
+# Tenant: the "base" institution capabilities are recorded on.
+id: acme
+name: Acme Federal Credit Union
+product: corelink-teller
+version: 4.2.1
+base_url: http://127.0.0.1:8800/acme
+policy: default
+secrets:
+  corelink.username: CUA_SECRET_CORELINK_USERNAME
+  corelink.password: CUA_SECRET_CORELINK_PASSWORD

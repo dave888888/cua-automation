@@ -1,0 +1,85 @@
+{
+  "run_id": "replay-20261021T185538-3c5f1d",
+  "capability_id": "corelink.member.savings_balance",
+  "capability_version": "0.1.0",
+  "tenant": "acme",
+  "status": "failed",
+  "outputs": {},
+  "outcome": null,
+  "failure": {
+    "kind": "recovery_exhausted",
+    "code": "APP_ERROR_TRANSIENT",
+    "step_id": "s2",
+    "step_intent": "Enter member ID",
+    "expected": null,
+    "observed": "APP_ERROR_TRANSIENT persisted after 2 restarts",
+    "detector": "processor_unavailable",
+    "evidence": [
+      "shots/020-s2-app_error_transient.png",
+      "dom/020-s2-app_error_transient.txt"
+    ],
+    "hint": null
+  },
+  "blocked": null,
+  "recoveries": [
+    {
+      "step_id": "s2",
+      "detector": "processor_unavailable",
+      "action": "restart_flow",
+      "attempt": 1,
+      "ok": true
+    },
+    {
+      "step_id": "s2",
+      "detector": "processor_unavailable",
+      "action": "restart_flow",
+      "attempt": 2,
+      "ok": true
+    }
+  ],
+  "drift": [],
+  "steps": [
+    {
+      "step_id": "s1",
+      "action": "click",
+      "status": "ok",
+      "matched_by": "role",
+      "ms": 66
+    },
+    {
+      "step_id": "s2",
+      "action": "fill",
+      "status": "restarted",
+      "matched_by": null,
+      "ms": 1525
+    },
+    {
+      "step_id": "s1",
+      "action": "click",
+      "status": "ok",
+      "matched_by": "role",
+      "ms": 90
+    },
+    {
+      "step_id": "s2",
+      "action": "fill",
+      "status": "restarted",
+      "matched_by": null,
+      "ms": 1535
+    },
+    {
+      "step_id": "s1",
+      "action": "click",
+      "status": "ok",
+      "matched_by": "role",
+      "ms": 80
+    }
+  ],
+  "interventions": [],
+  "warnings": [
+    "capability is a draft (read-only, so allowed)"
+  ],
+  "started_at": "2026-10-21T18:55:38.706621Z",
+  "duration_ms": 3517,
+  "run_dir": "/var/folders/00/bngwcd_558q3zvzw80bdy_l40000gn/T/cua-evidence-f4kp6tsp/runs/replay-20261021T185538-3c5f1d"
+}

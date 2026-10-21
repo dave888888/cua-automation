@@ -1,0 +1,25 @@
+===== frame top
+
+===== frame banner
+Acme Federal Credit Union	CoreLink Teller v4.2.1  |  Operator: [REDACTED:secret]
+===== frame nav
+Functions
+Member Search
+Daily Reports
+System Admin
+Sign Off
+===== frame main
+Member Detail
+Member:	[REDACTED:field:member]
+Account #:	[REDACTED:field:account #]
+SSN:	[REDACTED:field:ssn]
+Member Since:	2019-09-15
+
+
+Share	Description	Available Balance
+S01	Share Savings	[REDACTED:money]
+S10	Checking	[REDACTED:money]
+
+Open Sub-Account  
+
+New search

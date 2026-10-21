@@ -1,0 +1,61 @@
+{
+  "id": "int-6b9706d7",
+  "run_id": "replay-20261021T185614-50b7b4",
+  "session_id": "replay-20261021T185614-50b7b4",
+  "epoch": 1,
+  "kind": "failure",
+  "subject": "corelink.member.savings_balance@0.1.0",
+  "step_id": "s4",
+  "step_intent": "Read savings balance",
+  "code": "SUPERVISOR_HOLD",
+  "reason": "requires_human (SUPERVISOR_HOLD); observed Teller drawer needs supervisor release. Policy forbids automation from releasing it.; only an operator can clear this; replay with on_failure=escalate",
+  "screenshot": "shots/014-s4-supervisor_hold.png",
+  "frames": {
+    "top": "/desk",
+    "banner": "/banner",
+    "nav": "/nav",
+    "main": "/mbr/result"
+  },
+  "allowed_decisions": [
+    "resume",
+    "abort"
+  ],
+  "in_flight_unaccounted": false,
+  "created_at": "2026-10-21T18:56:15.056691Z",
+  "status": "resolved",
+  "claimed_by": "ops.jdoe",
+  "claimed_at": "2026-10-21T18:56:16.137911Z",
+  "rejected_resumes": [
+    {
+      "at": "2026-10-21T18:56:16.874338Z",
+      "by": "ops.jdoe",
+      "decision": "resume",
+      "checkpoint": "blocked",
+      "reason": "SUPERVISOR_HOLD is still present (Teller drawer needs supervisor release. Policy forbids automation from releasing it.); clear it before resuming"
+    }
+  ],
+  "unclaimed_activity": 0,
+  "resolution": {
+    "decision": "resume",
+    "note": "",
+    "by": "ops.jdoe",
+    "at": "2026-10-21T18:56:20.503502Z",
+    "human_actions": [
+      {
+        "at": "2026-10-21T18:56:17+00:00",
+        "epoch": 3,
+        "by": "ops.jdoe",
+        "source": "console",
+        "kind": "click",
+        "target": "Release Hold",
+        "role": "button",
+        "ref": "main-e1",
+        "value": ""
+      }
+    ],
+    "timed_out": false,
+    "resumed": true,
+    "checkpoint": "continue@3",
+    "verification_detail": "s3 postcondition holds"
+  }
+}

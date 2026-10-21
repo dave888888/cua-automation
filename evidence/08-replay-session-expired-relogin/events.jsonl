@@ -1,0 +1,29 @@
+{"seq": 1, "t_ms": 0, "ts": "2026-10-21T18:55:37.009+00:00", "type": "faults_injected_by_harness", "faults": {"session_expire@/mbr/result": 1}}
+{"seq": 2, "t_ms": 280, "ts": "2026-10-21T18:55:37.289+00:00", "type": "session_started", "tenant": "acme", "headed": false, "policy": "default"}
+{"seq": 3, "t_ms": 280, "ts": "2026-10-21T18:55:37.289+00:00", "type": "replay_started", "capability": "corelink.member.savings_balance", "version": "0.1.0", "tenant": "acme", "content_hash": "sha256:51c86640698ba879a705de1ce8680b76", "approved": false, "overlay": [], "options": {"irreversible": "deny", "on_failure": "fail", "use_tenant_overrides": true, "escalation_timeout_s": 900, "max_interventions": 2}}
+{"seq": 4, "t_ms": 294, "ts": "2026-10-21T18:55:37.303+00:00", "type": "login_started", "route": "/login"}
+{"seq": 5, "t_ms": 406, "ts": "2026-10-21T18:55:37.415+00:00", "type": "login_ok"}
+{"seq": 6, "t_ms": 425, "ts": "2026-10-21T18:55:37.434+00:00", "type": "session_ready", "app_version": "4.2.1"}
+{"seq": 7, "t_ms": 439, "ts": "2026-10-21T18:55:37.448+00:00", "type": "step_started", "step_id": "s1", "action": "click", "intent": "Open Member Search", "risk": "read"}
+{"seq": 8, "t_ms": 505, "ts": "2026-10-21T18:55:37.514+00:00", "type": "step_ok", "step_id": "s1", "matched_by": "role"}
+{"seq": 9, "t_ms": 505, "ts": "2026-10-21T18:55:37.514+00:00", "type": "step_started", "step_id": "s2", "action": "fill", "intent": "Enter member ID", "risk": "read"}
+{"seq": 10, "t_ms": 532, "ts": "2026-10-21T18:55:37.541+00:00", "type": "step_ok", "step_id": "s2", "matched_by": "label"}
+{"seq": 11, "t_ms": 532, "ts": "2026-10-21T18:55:37.541+00:00", "type": "step_started", "step_id": "s3", "action": "click", "intent": "Search", "risk": "read"}
+{"seq": 12, "t_ms": 836, "ts": "2026-10-21T18:55:37.845+00:00", "type": "step_ok", "step_id": "s3", "matched_by": "role"}
+{"seq": 13, "t_ms": 836, "ts": "2026-10-21T18:55:37.845+00:00", "type": "step_started", "step_id": "s4", "action": "extract", "intent": "Read savings balance", "risk": "read"}
+{"seq": 14, "t_ms": 840, "ts": "2026-10-21T18:55:37.848+00:00", "type": "detector_hit", "step_id": "s4", "detector": "session_expired", "code": "SESSION_EXPIRED", "classification": "recoverable", "message": null}
+{"seq": 15, "t_ms": 840, "ts": "2026-10-21T18:55:37.849+00:00", "type": "recovery", "step_id": "s4", "detector": "session_expired", "action": "restart_session", "attempt": 1, "backoff_ms": 0}
+{"seq": 16, "t_ms": 840, "ts": "2026-10-21T18:55:37.849+00:00", "type": "login_started", "route": "/login"}
+{"seq": 17, "t_ms": 920, "ts": "2026-10-21T18:55:37.929+00:00", "type": "login_ok"}
+{"seq": 18, "t_ms": 941, "ts": "2026-10-21T18:55:37.950+00:00", "type": "step_started", "step_id": "s1", "action": "click", "intent": "Open Member Search", "risk": "read"}
+{"seq": 19, "t_ms": 1007, "ts": "2026-10-21T18:55:38.016+00:00", "type": "step_ok", "step_id": "s1", "matched_by": "role"}
+{"seq": 20, "t_ms": 1007, "ts": "2026-10-21T18:55:38.016+00:00", "type": "step_started", "step_id": "s2", "action": "fill", "intent": "Enter member ID", "risk": "read"}
+{"seq": 21, "t_ms": 1035, "ts": "2026-10-21T18:55:38.044+00:00", "type": "step_ok", "step_id": "s2", "matched_by": "label"}
+{"seq": 22, "t_ms": 1035, "ts": "2026-10-21T18:55:38.044+00:00", "type": "step_started", "step_id": "s3", "action": "click", "intent": "Search", "risk": "read"}
+{"seq": 23, "t_ms": 1338, "ts": "2026-10-21T18:55:38.347+00:00", "type": "step_ok", "step_id": "s3", "matched_by": "role"}
+{"seq": 24, "t_ms": 1338, "ts": "2026-10-21T18:55:38.347+00:00", "type": "step_started", "step_id": "s4", "action": "extract", "intent": "Read savings balance", "risk": "read"}
+{"seq": 25, "t_ms": 1370, "ts": "2026-10-21T18:55:38.379+00:00", "type": "extracted", "step_id": "s4", "output": "savings_balance", "value": "[REDACTED:output:savings_balance]"}
+{"seq": 26, "t_ms": 1375, "ts": "2026-10-21T18:55:38.384+00:00", "type": "step_ok", "step_id": "s4", "matched_by": "label"}
+{"seq": 27, "t_ms": 1378, "ts": "2026-10-21T18:55:38.387+00:00", "type": "checkpoint_ok", "condition": "{'kind': 'all', 'conditions': [{'kind': 'url', 'frame': [{'name': 'main'}], 'route': '/mbr/result?q1={{member_id}}'}, {'kind': 'text', 'frame': [{'name': 'main'}], 'pattern': 'Member\\\\ Detail'}]}"}
+{"seq": 28, "t_ms": 1385, "ts": "2026-10-21T18:55:38.394+00:00", "type": "invariant_ok", "invariant": "shows_member_id"}
+{"seq": 29, "t_ms": 1385, "ts": "2026-10-21T18:55:38.394+00:00", "type": "replay_finished", "status": "success", "outcome": null, "failure": null, "blocked": null, "recoveries": 1, "drift": 0}

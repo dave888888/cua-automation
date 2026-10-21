@@ -1,0 +1,22 @@
+{"seq": 1, "t_ms": 0, "ts": "2026-10-21T18:55:38.434+00:00", "type": "faults_injected_by_harness", "faults": {"error500@/mbr/find": 5}}
+{"seq": 2, "t_ms": 271, "ts": "2026-10-21T18:55:38.705+00:00", "type": "session_started", "tenant": "acme", "headed": false, "policy": "default"}
+{"seq": 3, "t_ms": 272, "ts": "2026-10-21T18:55:38.706+00:00", "type": "replay_started", "capability": "corelink.member.savings_balance", "version": "0.1.0", "tenant": "acme", "content_hash": "sha256:51c86640698ba879a705de1ce8680b76", "approved": false, "overlay": [], "options": {"irreversible": "deny", "on_failure": "fail", "use_tenant_overrides": true, "escalation_timeout_s": 900, "max_interventions": 2}}
+{"seq": 4, "t_ms": 286, "ts": "2026-10-21T18:55:38.720+00:00", "type": "login_started", "route": "/login"}
+{"seq": 5, "t_ms": 397, "ts": "2026-10-21T18:55:38.832+00:00", "type": "login_ok"}
+{"seq": 6, "t_ms": 416, "ts": "2026-10-21T18:55:38.851+00:00", "type": "session_ready", "app_version": "4.2.1"}
+{"seq": 7, "t_ms": 429, "ts": "2026-10-21T18:55:38.864+00:00", "type": "step_started", "step_id": "s1", "action": "click", "intent": "Open Member Search", "risk": "read"}
+{"seq": 8, "t_ms": 496, "ts": "2026-10-21T18:55:38.930+00:00", "type": "step_ok", "step_id": "s1", "matched_by": "role"}
+{"seq": 9, "t_ms": 496, "ts": "2026-10-21T18:55:38.930+00:00", "type": "step_started", "step_id": "s2", "action": "fill", "intent": "Enter member ID", "risk": "read"}
+{"seq": 10, "t_ms": 500, "ts": "2026-10-21T18:55:38.934+00:00", "type": "detector_hit", "step_id": "s2", "detector": "processor_unavailable", "code": "APP_ERROR_TRANSIENT", "classification": "recoverable", "message": null}
+{"seq": 11, "t_ms": 500, "ts": "2026-10-21T18:55:38.934+00:00", "type": "recovery", "step_id": "s2", "detector": "processor_unavailable", "action": "restart_flow", "attempt": 1, "backoff_ms": 1500}
+{"seq": 12, "t_ms": 2021, "ts": "2026-10-21T18:55:40.455+00:00", "type": "step_started", "step_id": "s1", "action": "click", "intent": "Open Member Search", "risk": "read"}
+{"seq": 13, "t_ms": 2111, "ts": "2026-10-21T18:55:40.545+00:00", "type": "step_ok", "step_id": "s1", "matched_by": "role"}
+{"seq": 14, "t_ms": 2111, "ts": "2026-10-21T18:55:40.545+00:00", "type": "step_started", "step_id": "s2", "action": "fill", "intent": "Enter member ID", "risk": "read"}
+{"seq": 15, "t_ms": 2115, "ts": "2026-10-21T18:55:40.549+00:00", "type": "detector_hit", "step_id": "s2", "detector": "processor_unavailable", "code": "APP_ERROR_TRANSIENT", "classification": "recoverable", "message": null}
+{"seq": 16, "t_ms": 2115, "ts": "2026-10-21T18:55:40.549+00:00", "type": "recovery", "step_id": "s2", "detector": "processor_unavailable", "action": "restart_flow", "attempt": 2, "backoff_ms": 1500}
+{"seq": 17, "t_ms": 3647, "ts": "2026-10-21T18:55:42.081+00:00", "type": "step_started", "step_id": "s1", "action": "click", "intent": "Open Member Search", "risk": "read"}
+{"seq": 18, "t_ms": 3728, "ts": "2026-10-21T18:55:42.162+00:00", "type": "step_ok", "step_id": "s1", "matched_by": "role"}
+{"seq": 19, "t_ms": 3728, "ts": "2026-10-21T18:55:42.162+00:00", "type": "step_started", "step_id": "s2", "action": "fill", "intent": "Enter member ID", "risk": "read"}
+{"seq": 20, "t_ms": 3732, "ts": "2026-10-21T18:55:42.166+00:00", "type": "detector_hit", "step_id": "s2", "detector": "processor_unavailable", "code": "APP_ERROR_TRANSIENT", "classification": "recoverable", "message": null}
+{"seq": 21, "t_ms": 3789, "ts": "2026-10-21T18:55:42.224+00:00", "type": "failure", "kind": "recovery_exhausted", "code": "APP_ERROR_TRANSIENT", "step_id": "s2", "step_intent": "Enter member ID", "expected": null, "observed": "APP_ERROR_TRANSIENT persisted after 2 restarts", "detector": "processor_unavailable", "evidence": ["shots/020-s2-app_error_transient.png", "dom/020-s2-app_error_transient.txt"], "hint": null}
+{"seq": 22, "t_ms": 3790, "ts": "2026-10-21T18:55:42.224+00:00", "type": "replay_finished", "status": "failed", "outcome": null, "failure": "APP_ERROR_TRANSIENT", "blocked": null, "recoveries": 2, "drift": 0}

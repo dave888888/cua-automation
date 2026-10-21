@@ -1,0 +1,23 @@
+{
+  "run_id": "replay-20261021T185610-a79853",
+  "capability_id": "corelink.member.open_share",
+  "capability_version": "0.1.0",
+  "tenant": "acme",
+  "status": "blocked",
+  "outputs": {},
+  "outcome": null,
+  "failure": null,
+  "blocked": {
+    "code": "IRREVERSIBLE_NOT_AUTHORIZED",
+    "message": "caller did not authorise irreversible actions (irreversible=allow|ask_operator)",
+    "step_id": null
+  },
+  "recoveries": [],
+  "drift": [],
+  "steps": [],
+  "interventions": [],
+  "warnings": [],
+  "started_at": "2026-10-21T18:56:10.567188Z",
+  "duration_ms": 0,
+  "run_dir": "/var/folders/00/bngwcd_558q3zvzw80bdy_l40000gn/T/cua-evidence-f4kp6tsp/runs/replay-20261021T185610-a79853"
+}

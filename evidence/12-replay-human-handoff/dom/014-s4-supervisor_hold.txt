@@ -1,0 +1,12 @@
+===== frame top
+
+===== frame banner
+Acme Federal Credit Union	CoreLink Teller v4.2.1  |  Operator: [REDACTED:secret]
+===== frame nav
+Functions
+Member Search
+Daily Reports
+System Admin
+Sign Off
+===== frame main
+SUPERVISOR HOLD: this teller drawer requires supervisor release (SUP-210).

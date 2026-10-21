@@ -1,0 +1,21 @@
+{"seq": 1, "t_ms": 272, "ts": "2026-10-21T18:55:43.448+00:00", "type": "session_started", "tenant": "blueriver", "headed": false, "policy": "default"}
+{"seq": 2, "t_ms": 272, "ts": "2026-10-21T18:55:43.448+00:00", "type": "replay_started", "capability": "corelink.member.savings_balance", "version": "0.1.0", "tenant": "blueriver", "content_hash": "sha256:51c86640698ba879a705de1ce8680b76", "approved": false, "overlay": [], "options": {"irreversible": "deny", "on_failure": "fail", "use_tenant_overrides": false, "escalation_timeout_s": 900, "max_interventions": 2}}
+{"seq": 3, "t_ms": 285, "ts": "2026-10-21T18:55:43.462+00:00", "type": "login_started", "route": "/login"}
+{"seq": 4, "t_ms": 398, "ts": "2026-10-21T18:55:43.574+00:00", "type": "login_ok"}
+{"seq": 5, "t_ms": 418, "ts": "2026-10-21T18:55:43.594+00:00", "type": "session_ready", "app_version": "4.3.0"}
+{"seq": 6, "t_ms": 432, "ts": "2026-10-21T18:55:43.608+00:00", "type": "step_started", "step_id": "s1", "action": "click", "intent": "Open Member Search", "risk": "read"}
+{"seq": 7, "t_ms": 453, "ts": "2026-10-21T18:55:43.629+00:00", "type": "drift", "step_id": "s1", "matched_by": "css", "strategy_index": 2, "recorded": {"role": "link", "name": "Member Search", "tag": "a"}, "note": "higher-priority strategies missed: role(link 'Member Search'): 0 matches; text('Member Search'): 0 matches"}
+{"seq": 8, "t_ms": 514, "ts": "2026-10-21T18:55:43.691+00:00", "type": "step_ok", "step_id": "s1", "matched_by": "css"}
+{"seq": 9, "t_ms": 515, "ts": "2026-10-21T18:55:43.691+00:00", "type": "step_started", "step_id": "s2", "action": "fill", "intent": "Enter member ID", "risk": "read"}
+{"seq": 10, "t_ms": 530, "ts": "2026-10-21T18:55:43.707+00:00", "type": "drift", "step_id": "s2", "matched_by": "css", "strategy_index": 1, "recorded": {"role": "textbox", "tag": "input", "neighbor_text": "Member ID:"}, "note": "higher-priority strategies missed: label('Member ID:' next_control): 0 matches"}
+{"seq": 11, "t_ms": 546, "ts": "2026-10-21T18:55:43.723+00:00", "type": "step_ok", "step_id": "s2", "matched_by": "css"}
+{"seq": 12, "t_ms": 546, "ts": "2026-10-21T18:55:43.723+00:00", "type": "step_started", "step_id": "s3", "action": "click", "intent": "Search", "risk": "read"}
+{"seq": 13, "t_ms": 558, "ts": "2026-10-21T18:55:43.734+00:00", "type": "drift", "step_id": "s3", "matched_by": "css", "strategy_index": 3, "recorded": {"role": "button", "name": "Search", "tag": "input", "neighbor_text": "Member ID:"}, "note": "higher-priority strategies missed: role(button 'Search'): 0 matches; label('Member ID:' next_control): 0 matches; text('Search'): 0 matches"}
+{"seq": 14, "t_ms": 848, "ts": "2026-10-21T18:55:44.025+00:00", "type": "step_ok", "step_id": "s3", "matched_by": "css"}
+{"seq": 15, "t_ms": 848, "ts": "2026-10-21T18:55:44.025+00:00", "type": "step_started", "step_id": "s4", "action": "extract", "intent": "Read savings balance", "risk": "read"}
+{"seq": 16, "t_ms": 884, "ts": "2026-10-21T18:55:44.060+00:00", "type": "drift", "step_id": "s4", "matched_by": "css", "strategy_index": 1, "recorded": {"role": "cell", "tag": "td", "neighbor_text": "Share Savings"}, "note": "higher-priority strategies missed: label('Share Savings' row_cell): 0 matches"}
+{"seq": 17, "t_ms": 887, "ts": "2026-10-21T18:55:44.063+00:00", "type": "extracted", "step_id": "s4", "output": "savings_balance", "value": "[REDACTED:output:savings_balance]"}
+{"seq": 18, "t_ms": 892, "ts": "2026-10-21T18:55:44.068+00:00", "type": "step_ok", "step_id": "s4", "matched_by": "css"}
+{"seq": 19, "t_ms": 895, "ts": "2026-10-21T18:55:44.072+00:00", "type": "checkpoint_ok", "condition": "{'kind': 'all', 'conditions': [{'kind': 'url', 'frame': [{'name': 'main'}], 'route': '/mbr/result?q1={{member_id}}'}, {'kind': 'text', 'frame': [{'name': 'main'}], 'pattern': 'Member\\\\ Detail'}]}"}
+{"seq": 20, "t_ms": 902, "ts": "2026-10-21T18:55:44.078+00:00", "type": "invariant_ok", "invariant": "shows_member_id"}
+{"seq": 21, "t_ms": 902, "ts": "2026-10-21T18:55:44.078+00:00", "type": "replay_finished", "status": "success", "outcome": null, "failure": null, "blocked": null, "recoveries": 0, "drift": 4}

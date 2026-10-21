@@ -1,0 +1,15 @@
+{"seq": 1, "t_ms": 268, "ts": "2026-10-21T18:55:31.184+00:00", "type": "session_started", "tenant": "acme", "headed": false, "policy": "default"}
+{"seq": 2, "t_ms": 269, "ts": "2026-10-21T18:55:31.184+00:00", "type": "replay_started", "capability": "corelink.member.savings_balance", "version": "0.1.0", "tenant": "acme", "content_hash": "sha256:51c86640698ba879a705de1ce8680b76", "approved": false, "overlay": [], "options": {"irreversible": "deny", "on_failure": "fail", "use_tenant_overrides": true, "escalation_timeout_s": 900, "max_interventions": 2}}
+{"seq": 3, "t_ms": 282, "ts": "2026-10-21T18:55:31.198+00:00", "type": "login_started", "route": "/login"}
+{"seq": 4, "t_ms": 395, "ts": "2026-10-21T18:55:31.310+00:00", "type": "login_ok"}
+{"seq": 5, "t_ms": 415, "ts": "2026-10-21T18:55:31.330+00:00", "type": "session_ready", "app_version": "4.2.1"}
+{"seq": 6, "t_ms": 428, "ts": "2026-10-21T18:55:31.344+00:00", "type": "step_started", "step_id": "s1", "action": "click", "intent": "Open Member Search", "risk": "read"}
+{"seq": 7, "t_ms": 494, "ts": "2026-10-21T18:55:31.409+00:00", "type": "step_ok", "step_id": "s1", "matched_by": "role"}
+{"seq": 8, "t_ms": 494, "ts": "2026-10-21T18:55:31.410+00:00", "type": "step_started", "step_id": "s2", "action": "fill", "intent": "Enter member ID", "risk": "read"}
+{"seq": 9, "t_ms": 521, "ts": "2026-10-21T18:55:31.437+00:00", "type": "step_ok", "step_id": "s2", "matched_by": "label"}
+{"seq": 10, "t_ms": 521, "ts": "2026-10-21T18:55:31.437+00:00", "type": "step_started", "step_id": "s3", "action": "click", "intent": "Search", "risk": "read"}
+{"seq": 11, "t_ms": 828, "ts": "2026-10-21T18:55:31.743+00:00", "type": "step_ok", "step_id": "s3", "matched_by": "role"}
+{"seq": 12, "t_ms": 828, "ts": "2026-10-21T18:55:31.743+00:00", "type": "step_started", "step_id": "s4", "action": "extract", "intent": "Read savings balance", "risk": "read"}
+{"seq": 13, "t_ms": 833, "ts": "2026-10-21T18:55:31.748+00:00", "type": "detector_hit", "step_id": "s4", "detector": "record_not_found", "code": "NOT_FOUND", "classification": "business_outcome", "message": "No member record matches"}
+{"seq": 14, "t_ms": 833, "ts": "2026-10-21T18:55:31.749+00:00", "type": "business_outcome", "code": "NOT_FOUND", "message": "No member record matches", "step_id": "s4"}
+{"seq": 15, "t_ms": 833, "ts": "2026-10-21T18:55:31.749+00:00", "type": "replay_finished", "status": "business_outcome", "outcome": "NOT_FOUND", "failure": null, "blocked": null, "recoveries": 0, "drift": 0}

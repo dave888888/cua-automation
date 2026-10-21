@@ -1,0 +1,4 @@
+{"seq": 1, "t_ms": 273, "ts": "2026-10-21T18:55:32.946+00:00", "type": "session_started", "tenant": "acme", "headed": false, "policy": "default"}
+{"seq": 2, "t_ms": 274, "ts": "2026-10-21T18:55:32.946+00:00", "type": "replay_started", "capability": "corelink.member.savings_balance", "version": "0.1.0", "tenant": "acme", "content_hash": "sha256:51c86640698ba879a705de1ce8680b76", "approved": false, "overlay": [], "options": {"irreversible": "deny", "on_failure": "fail", "use_tenant_overrides": true, "escalation_timeout_s": 900, "max_interventions": 2}}
+{"seq": 3, "t_ms": 274, "ts": "2026-10-21T18:55:32.946+00:00", "type": "blocked", "code": "INVALID_INPUT", "message": "member_id does not match ^\\d+$", "step_id": null}
+{"seq": 4, "t_ms": 274, "ts": "2026-10-21T18:55:32.946+00:00", "type": "replay_finished", "status": "blocked", "outcome": null, "failure": null, "blocked": "INVALID_INPUT", "recoveries": 0, "drift": 0}

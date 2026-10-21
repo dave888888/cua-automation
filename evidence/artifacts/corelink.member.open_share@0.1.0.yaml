@@ -1,0 +1,447 @@
+# Capability artifact corelink.member.open_share@0.1.0 (approved)
+# content hash: sha256:25b81230f77d9d4a23c89a63e37ab1fd
+# Review card: 0.1.0.md
+schema_version: cua.capability/v1
+id: corelink.member.open_share
+version: 0.1.0
+title: Open a sub-account (share)
+description: Searched the member, opened the Open Sub-Account form, and entered the share type, nickname and opening
+  deposit. Continued to the review screen and submitted it, accepting the post confirmation dialog. The "Share Added"
+  screen then showed the confirmation number, which I extracted as confirmation_number.
+status: approved
+app:
+  product: corelink-teller
+  versions: '>=4.2,<5'
+  surface: legacy_web
+inputs:
+- name: member_id
+  type: string
+  description: ''
+  required: true
+  sensitivity: pii
+  pattern: ^\d+$
+  identifies_record: true
+- name: share_type
+  type: string
+  description: ''
+  required: true
+  sensitivity: public
+  example: Savings Club
+  identifies_record: false
+- name: nickname
+  type: string
+  description: ''
+  required: true
+  sensitivity: internal
+  identifies_record: false
+- name: opening_deposit
+  type: decimal
+  description: ''
+  required: true
+  sensitivity: internal
+  identifies_record: false
+outputs:
+- name: confirmation_number
+  type: string
+  description: Confirmation number of the new share
+  sensitivity: internal
+  from_step: s10
+preconditions:
+- authenticated_session
+entry_route: /desk
+steps:
+- id: s1
+  intent: Open Member Search
+  risk: read
+  expect:
+    kind: url
+    frame:
+    - name: main
+    route: /mbr/find
+  timeout_ms: 10000
+  provenance: agent
+  verification:
+    method: route
+    review_required: false
+    note: frame main
+  action: click
+  target:
+    frame:
+    - name: nav
+    strategies:
+    - kind: role
+      role: link
+      name: Member Search
+      exact: true
+    - kind: text
+      text: Member Search
+      role: link
+    - kind: css
+      selector: body > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(2) > td:nth-of-type(1) > a:nth-of-type(1)
+    - kind: xpath
+      xpath: /html[1]/body[1]/table[1]/tbody[1]/tr[2]/td[1]/a[1]
+    fingerprint:
+      role: link
+      name: Member Search
+      tag: a
+    sensitive: false
+- id: s2
+  intent: Enter member ID
+  risk: read
+  timeout_ms: 10000
+  provenance: agent
+  verification:
+    method: readback
+    review_required: false
+    note: ''
+  action: fill
+  target:
+    frame:
+    - name: main
+    strategies:
+    - kind: label
+      anchor: 'Member ID:'
+      relation: next_control
+      role: textbox
+      cell_offset: 1
+    - kind: css
+      selector: input[name="q1"]
+    - kind: xpath
+      xpath: /html[1]/body[1]/form[1]/table[1]/tbody[1]/tr[1]/td[2]/input[1]
+    fingerprint:
+      role: textbox
+      tag: input
+      neighbor_text: 'Member ID:'
+    sensitive: false
+  value:
+    param: member_id
+- id: s3
+  intent: Search member
+  risk: read
+  expect:
+    kind: url
+    frame:
+    - name: main
+    route: /mbr/result?q1={{member_id}}
+  timeout_ms: 10000
+  provenance: agent
+  verification:
+    method: route
+    review_required: false
+    note: frame main
+  action: click
+  target:
+    frame:
+    - name: main
+    strategies:
+    - kind: role
+      role: button
+      name: Search
+      exact: true
+    - kind: label
+      anchor: 'Member ID:'
+      relation: next_control
+      role: button
+      cell_offset: 1
+    - kind: text
+      text: Search
+      role: button
+    - kind: css
+      selector: body > form:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(3)
+        > input:nth-of-type(1)
+    - kind: xpath
+      xpath: /html[1]/body[1]/form[1]/table[1]/tbody[1]/tr[1]/td[3]/input[1]
+    fingerprint:
+      role: button
+      name: Search
+      tag: input
+      neighbor_text: 'Member ID:'
+    sensitive: false
+- id: s4
+  intent: Open sub-account form
+  risk: read
+  expect:
+    kind: url
+    frame:
+    - name: main
+    route: /mbr/{{member_id}}/share/new
+  timeout_ms: 10000
+  provenance: agent
+  verification:
+    method: route
+    review_required: false
+    note: frame main
+  action: click
+  target:
+    frame:
+    - name: main
+    strategies:
+    - kind: role
+      role: link
+      name: Open Sub-Account
+      exact: true
+    - kind: text
+      text: Open Sub-Account
+      role: link
+    - kind: css
+      selector: body > a:nth-of-type(1)
+    - kind: xpath
+      xpath: /html[1]/body[1]/a[1]
+    fingerprint:
+      role: link
+      name: Open Sub-Account
+      tag: a
+    sensitive: false
+- id: s5
+  intent: Choose share type
+  risk: read
+  timeout_ms: 10000
+  provenance: agent
+  verification:
+    method: selected
+    review_required: false
+    note: ''
+  action: select
+  target:
+    frame:
+    - name: main
+    strategies:
+    - kind: label
+      anchor: 'Share Type:'
+      relation: next_control
+      role: combobox
+      cell_offset: 1
+    - kind: css
+      selector: select[name="f_tp"]
+    - kind: xpath
+      xpath: /html[1]/body[1]/form[1]/table[1]/tbody[1]/tr[1]/td[2]/select[1]
+    fingerprint:
+      role: combobox
+      tag: select
+      neighbor_text: 'Share Type:'
+    sensitive: false
+  value:
+    param: share_type
+- id: s6
+  intent: Enter nickname
+  risk: read
+  timeout_ms: 10000
+  provenance: agent
+  verification:
+    method: readback
+    review_required: false
+    note: ''
+  action: fill
+  target:
+    frame:
+    - name: main
+    strategies:
+    - kind: label
+      anchor: 'Nickname:'
+      relation: next_control
+      role: textbox
+      cell_offset: 1
+    - kind: css
+      selector: input[name="f_nk"]
+    - kind: xpath
+      xpath: /html[1]/body[1]/form[1]/table[1]/tbody[1]/tr[2]/td[2]/input[1]
+    fingerprint:
+      role: textbox
+      tag: input
+      neighbor_text: 'Nickname:'
+    sensitive: false
+  value:
+    param: nickname
+- id: s7
+  intent: Enter opening deposit
+  risk: read
+  timeout_ms: 10000
+  provenance: agent
+  verification:
+    method: readback
+    review_required: false
+    note: ''
+  action: fill
+  target:
+    frame:
+    - name: main
+    strategies:
+    - kind: label
+      anchor: 'Opening Deposit:'
+      relation: next_control
+      role: textbox
+      cell_offset: 1
+    - kind: css
+      selector: input[name="f_dp"]
+    - kind: xpath
+      xpath: /html[1]/body[1]/form[1]/table[1]/tbody[1]/tr[3]/td[2]/input[1]
+    fingerprint:
+      role: textbox
+      tag: input
+      neighbor_text: 'Opening Deposit:'
+    sensitive: false
+  value:
+    param: opening_deposit
+- id: s8
+  intent: Continue to confirmation
+  risk: read
+  expect:
+    kind: url
+    frame:
+    - name: main
+    route: /mbr/{{member_id}}/share/review
+  timeout_ms: 10000
+  provenance: agent
+  verification:
+    method: route
+    review_required: false
+    note: frame main
+  action: click
+  target:
+    frame:
+    - name: main
+    strategies:
+    - kind: role
+      role: button
+      name: Continue
+      exact: true
+    - kind: text
+      text: Continue
+      role: button
+    - kind: css
+      selector: body > form:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(4) > td:nth-of-type(2)
+        > input:nth-of-type(1)
+    - kind: xpath
+      xpath: /html[1]/body[1]/form[1]/table[1]/tbody[1]/tr[4]/td[2]/input[1]
+    fingerprint:
+      role: button
+      name: Continue
+      tag: input
+    sensitive: false
+- id: s9
+  intent: Submit new share
+  risk: irreversible
+  expect:
+    kind: url
+    frame:
+    - name: main
+    route: /mbr/{{member_id}}/share/commit
+  timeout_ms: 10000
+  provenance: agent
+  verification:
+    method: route
+    review_required: false
+    note: frame main
+  action: click
+  target:
+    frame:
+    - name: main
+    strategies:
+    - kind: role
+      role: button
+      name: Submit
+      exact: true
+    - kind: text
+      text: Submit
+      role: button
+    - kind: css
+      selector: body > form:nth-of-type(1) > input:nth-of-type(4)
+    - kind: xpath
+      xpath: /html[1]/body[1]/form[1]/input[4]
+    fingerprint:
+      role: button
+      name: Submit
+      tag: input
+    sensitive: false
+  dialog:
+    type: confirm
+    message_pattern: ^Post\ this\ new\ share\ to\ the\ member\ record\?$
+    accept: true
+- id: s10
+  intent: Read confirmation number
+  risk: read
+  timeout_ms: 10000
+  provenance: agent
+  verification:
+    method: value_parse
+    review_required: false
+    note: ''
+  action: extract
+  target:
+    frame:
+    - name: main
+    strategies:
+    - kind: label
+      anchor: Confirmation No.
+      relation: row_cell
+      cell_offset: 1
+    - kind: css
+      selector: body > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(2)
+    - kind: xpath
+      xpath: /html[1]/body[1]/table[1]/tbody[1]/tr[1]/td[2]
+    fingerprint:
+      role: cell
+      tag: td
+      neighbor_text: Confirmation No.
+    sensitive: false
+  output: confirmation_number
+  parse: string
+success:
+  kind: all
+  conditions:
+  - kind: url
+    frame:
+    - name: main
+    route: /mbr/{{member_id}}/share/commit
+  - kind: text
+    frame:
+    - name: main
+    pattern: Share\ Added
+invariants:
+- id: shows_share_type
+  description: final screen shows the requested share_type
+  when:
+    kind: value
+    target:
+      frame:
+      - name: main
+      strategies:
+      - kind: label
+        anchor: Share Type
+        relation: row_cell
+        cell_offset: 1
+      - kind: css
+        selector: body > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(2) > td:nth-of-type(2)
+      - kind: xpath
+        xpath: /html[1]/body[1]/table[1]/tbody[1]/tr[2]/td[2]
+      fingerprint:
+        role: cell
+        tag: td
+        neighbor_text: Share Type
+      sensitive: false
+    equals:
+      param: share_type
+    normalize: text
+- id: confirmation_number_shape
+  description: confirmation_number has the observed format
+  when:
+    kind: output
+    output: confirmation_number
+    pattern: ^[A-Z]+\-\d+$
+    normalize: text
+outcomes: []
+side_effects: irreversible
+provenance:
+  discovery_run_id: discovery-20261021T185547-fbd090
+  recorded_on_tenant: acme
+  recorded_on_version: 4.2.1
+  recorded_at: '2026-10-21T18:56:10Z'
+  model: claude-sonnet-5-5
+  goal_template: Open a new {share_type} sub-account named {nickname} with an opening deposit of {opening_deposit}
+    for member {member_id}, submit it, and read the confirmation number
+  human_steps: 0
+review:
+  approved_by: evidence-script
+  approved_at: '2026-10-21T18:56:10Z'
+  approved_hash: sha256:25b81230f77d9d4a23c89a63e37ab1fd
+  notes: ''

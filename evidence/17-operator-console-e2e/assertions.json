@@ -1,0 +1,118 @@
+{
+  "scenario": "supervisor hold \u2192 claim \u2192 rejected resume \u2192 Release Hold via console \u2192 resume",
+  "capability": "corelink.member.savings_balance/0.1.0.yaml",
+  "operator": "ops.jdoe",
+  "intervention": "int-6b9706d7",
+  "result": {
+    "status": "success",
+    "run_id": "replay-20261021T185614-50b7b4",
+    "outputs": {
+      "savings_balance": "[REDACTED:output:savings_balance]"
+    }
+  },
+  "all_passed": true,
+  "proofs": [
+    {
+      "step": "1. replay encounters the supervisor hold",
+      "expected": "intervention requested with code SUPERVISOR_HOLD and a failure screenshot",
+      "observed": {
+        "code": "SUPERVISOR_HOLD",
+        "screenshot": "shots/014-s4-supervisor_hold.png"
+      },
+      "passed": true
+    },
+    {
+      "step": "2. automation pauses",
+      "expected": "state awaiting_operator; an agent browser action is refused",
+      "observed": {
+        "state": "awaiting_operator",
+        "agent_action": "ControlLost: agent may not act: session is awaiting_operator (epoch 1)"
+      },
+      "passed": true
+    },
+    {
+      "step": "3. resume attempted before claim",
+      "expected": "HTTP 409 ownership error",
+      "observed": {
+        "status": 409,
+        "body": {
+          "error": "intervention int-6b9706d7 is awaiting_operator; claim it first"
+        }
+      },
+      "passed": true
+    },
+    {
+      "step": "4. operator claims the intervention",
+      "expected": "owner ops.jdoe, state human, epoch advanced",
+      "observed": {
+        "owner": "ops.jdoe",
+        "state": "human",
+        "epoch": 2,
+        "notice_epoch": 1
+      },
+      "passed": true
+    },
+    {
+      "step": "5. resume before releasing the hold",
+      "expected": "rejected; the operator keeps control",
+      "observed": {
+        "console_message": "Hand-back rejected, you still hold the session: SUPERVISOR_HOLD is still present (Teller drawer needs supervisor release. Policy forbids automation from releasing it.); clear it before resuming",
+        "state": "human",
+        "owner": "ops.jdoe"
+      },
+      "passed": true
+    },
+    {
+      "step": "6. operator clicks Release Hold through the console",
+      "expected": "human action recorded against the same session, attributed to the owner",
+      "observed": {
+        "actions": [
+          {
+            "kind": "click",
+            "target": "Release Hold",
+            "by": "ops.jdoe",
+            "epoch": 3
+          }
+        ],
+        "session": "replay-20261021T185614-50b7b4"
+      },
+      "passed": true
+    },
+    {
+      "step": "7. operator resumes",
+      "expected": "accepted; the original failure is cleared and a checkpoint verified",
+      "observed": {
+        "console_message": "Handed back. Automation resumed at continue@3."
+      },
+      "passed": true
+    },
+    {
+      "step": "8. automation finishes",
+      "expected": "status success, one browser session, intervention on that session, s4 completed after the verified hand-back",
+      "observed": {
+        "status": "success",
+        "sessions_started": 1,
+        "intervention_session": "replay-20261021T185614-50b7b4",
+        "replay_run_id": "replay-20261021T185614-50b7b4",
+        "interventions": [
+          "int-6b9706d7"
+        ],
+        "s4_after_handback": true
+      },
+      "passed": true
+    },
+    {
+      "step": "9. old operator token/epoch reused",
+      "expected": "every request rejected",
+      "observed": {
+        "http": {
+          "resolve": 404,
+          "act": 404,
+          "claim": 404
+        },
+        "control_check": "StaleRequest: no open intervention int-6b9706d7 on session replay-20261021T185614-50b7b4"
+      },
+      "passed": true
+    }
+  ]
+}

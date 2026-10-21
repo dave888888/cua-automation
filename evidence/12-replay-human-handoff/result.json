@@ -1,0 +1,61 @@
+{
+  "run_id": "replay-20261021T185544-2f4852",
+  "capability_id": "corelink.member.savings_balance",
+  "capability_version": "0.1.0",
+  "tenant": "acme",
+  "status": "success",
+  "outputs": {
+    "savings_balance": "[REDACTED:output:savings_balance]"
+  },
+  "outcome": null,
+  "failure": null,
+  "blocked": null,
+  "recoveries": [],
+  "drift": [],
+  "steps": [
+    {
+      "step_id": "s1",
+      "action": "click",
+      "status": "ok",
+      "matched_by": "role",
+      "ms": 66
+    },
+    {
+      "step_id": "s2",
+      "action": "fill",
+      "status": "ok",
+      "matched_by": "label",
+      "ms": 31
+    },
+    {
+      "step_id": "s3",
+      "action": "click",
+      "status": "ok",
+      "matched_by": "role",
+      "ms": 301
+    },
+    {
+      "step_id": "s4",
+      "action": "extract",
+      "status": "handback:continue@3",
+      "matched_by": null,
+      "ms": 1037
+    },
+    {
+      "step_id": "s4",
+      "action": "extract",
+      "status": "ok",
+      "matched_by": "label",
+      "ms": 18
+    }
+  ],
+  "interventions": [
+    "int-57064ac2"
+  ],
+  "warnings": [
+    "capability is a draft (read-only, so allowed)"
+  ],
+  "started_at": "2026-10-21T18:55:44.445129Z",
+  "duration_ms": 1622,
+  "run_dir": "/var/folders/00/bngwcd_558q3zvzw80bdy_l40000gn/T/cua-evidence-f4kp6tsp/runs/replay-20261021T185544-2f4852"
+}

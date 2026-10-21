@@ -1,0 +1,12 @@
+===== frame top
+
+===== frame banner
+Acme Federal Credit Union	CoreLink Teller v4.2.1  |  Operator: [REDACTED:secret]
+===== frame nav
+Functions
+Member Search
+Daily Reports
+System Admin
+Sign Off
+===== frame main
+CoreLink Error TP-500: Transaction processor unavailable. Please retry. If the problem persists contact the Help Desk.

@@ -1,0 +1,397 @@
+{
+  "schema_version": "cua.capability/v1",
+  "id": "corelink.member.savings_balance",
+  "version": "0.1.0",
+  "title": "Member savings balance",
+  "description": "Opens Member Search, enters the member ID, searches, and reads the Share Savings (S01) available balance from the Member Detail screen as savings_balance.",
+  "status": "draft",
+  "app": {
+    "product": "corelink-teller",
+    "versions": ">=4.2,<5",
+    "surface": "legacy_web"
+  },
+  "inputs": [
+    {
+      "name": "member_id",
+      "type": "string",
+      "description": "",
+      "required": true,
+      "sensitivity": "pii",
+      "pattern": "^\\d+$",
+      "enum": null,
+      "example": null,
+      "identifies_record": true
+    }
+  ],
+  "outputs": [
+    {
+      "name": "savings_balance",
+      "type": "decimal",
+      "description": "Available balance of Share Savings (S01)",
+      "sensitivity": "financial",
+      "from_step": "s4"
+    }
+  ],
+  "preconditions": [
+    "authenticated_session"
+  ],
+  "entry_route": "/desk",
+  "steps": [
+    {
+      "id": "s1",
+      "intent": "Open Member Search",
+      "risk": "read",
+      "require": null,
+      "expect": {
+        "kind": "url",
+        "frame": [
+          {
+            "name": "main",
+            "route": null
+          }
+        ],
+        "route": "/mbr/find"
+      },
+      "timeout_ms": 10000,
+      "provenance": "agent",
+      "verification": {
+        "method": "route",
+        "review_required": false,
+        "note": "frame main"
+      },
+      "action": "click",
+      "target": {
+        "frame": [
+          {
+            "name": "nav",
+            "route": null
+          }
+        ],
+        "strategies": [
+          {
+            "kind": "role",
+            "role": "link",
+            "name": "Member Search",
+            "exact": true
+          },
+          {
+            "kind": "text",
+            "text": "Member Search",
+            "role": "link"
+          },
+          {
+            "kind": "css",
+            "selector": "body > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(2) > td:nth-of-type(1) > a:nth-of-type(1)"
+          },
+          {
+            "kind": "xpath",
+            "xpath": "/html[1]/body[1]/table[1]/tbody[1]/tr[2]/td[1]/a[1]"
+          }
+        ],
+        "fingerprint": {
+          "role": "link",
+          "name": "Member Search",
+          "tag": "a",
+          "neighbor_text": null
+        },
+        "sensitive": false
+      },
+      "dialog": null
+    },
+    {
+      "id": "s2",
+      "intent": "Enter member ID",
+      "risk": "read",
+      "require": null,
+      "expect": null,
+      "timeout_ms": 10000,
+      "provenance": "agent",
+      "verification": {
+        "method": "readback",
+        "review_required": false,
+        "note": ""
+      },
+      "action": "fill",
+      "target": {
+        "frame": [
+          {
+            "name": "main",
+            "route": null
+          }
+        ],
+        "strategies": [
+          {
+            "kind": "label",
+            "anchor": "Member ID:",
+            "relation": "next_control",
+            "role": "textbox",
+            "cell_offset": 1
+          },
+          {
+            "kind": "css",
+            "selector": "input[name=\"q1\"]"
+          },
+          {
+            "kind": "xpath",
+            "xpath": "/html[1]/body[1]/form[1]/table[1]/tbody[1]/tr[1]/td[2]/input[1]"
+          }
+        ],
+        "fingerprint": {
+          "role": "textbox",
+          "name": null,
+          "tag": "input",
+          "neighbor_text": "Member ID:"
+        },
+        "sensitive": false
+      },
+      "value": {
+        "param": "member_id"
+      }
+    },
+    {
+      "id": "s3",
+      "intent": "Search",
+      "risk": "read",
+      "require": null,
+      "expect": {
+        "kind": "url",
+        "frame": [
+          {
+            "name": "main",
+            "route": null
+          }
+        ],
+        "route": "/mbr/result?q1={{member_id}}"
+      },
+      "timeout_ms": 10000,
+      "provenance": "agent",
+      "verification": {
+        "method": "route",
+        "review_required": false,
+        "note": "frame main"
+      },
+      "action": "click",
+      "target": {
+        "frame": [
+          {
+            "name": "main",
+            "route": null
+          }
+        ],
+        "strategies": [
+          {
+            "kind": "role",
+            "role": "button",
+            "name": "Search",
+            "exact": true
+          },
+          {
+            "kind": "label",
+            "anchor": "Member ID:",
+            "relation": "next_control",
+            "role": "button",
+            "cell_offset": 1
+          },
+          {
+            "kind": "text",
+            "text": "Search",
+            "role": "button"
+          },
+          {
+            "kind": "css",
+            "selector": "body > form:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(3) > input:nth-of-type(1)"
+          },
+          {
+            "kind": "xpath",
+            "xpath": "/html[1]/body[1]/form[1]/table[1]/tbody[1]/tr[1]/td[3]/input[1]"
+          }
+        ],
+        "fingerprint": {
+          "role": "button",
+          "name": "Search",
+          "tag": "input",
+          "neighbor_text": "Member ID:"
+        },
+        "sensitive": false
+      },
+      "dialog": null
+    },
+    {
+      "id": "s4",
+      "intent": "Read savings balance",
+      "risk": "read",
+      "require": {
+        "kind": "value",
+        "target": {
+          "frame": [
+            {
+              "name": "main",
+              "route": null
+            }
+          ],
+          "strategies": [
+            {
+              "kind": "label",
+              "anchor": "Account #:",
+              "relation": "row_cell",
+              "role": null,
+              "cell_offset": 1
+            },
+            {
+              "kind": "css",
+              "selector": "body > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(2) > td:nth-of-type(2)"
+            },
+            {
+              "kind": "xpath",
+              "xpath": "/html[1]/body[1]/table[1]/tbody[1]/tr[2]/td[2]"
+            }
+          ],
+          "fingerprint": {
+            "role": "cell",
+            "name": null,
+            "tag": "td",
+            "neighbor_text": "Account #:"
+          },
+          "sensitive": false
+        },
+        "equals": {
+          "param": "member_id"
+        },
+        "pattern": null,
+        "normalize": "text"
+      },
+      "expect": null,
+      "timeout_ms": 10000,
+      "provenance": "agent",
+      "verification": {
+        "method": "value_parse",
+        "review_required": false,
+        "note": ""
+      },
+      "action": "extract",
+      "target": {
+        "frame": [
+          {
+            "name": "main",
+            "route": null
+          }
+        ],
+        "strategies": [
+          {
+            "kind": "label",
+            "anchor": "Share Savings",
+            "relation": "row_cell",
+            "role": null,
+            "cell_offset": 1
+          },
+          {
+            "kind": "css",
+            "selector": "body > table:nth-of-type(2) > tbody:nth-of-type(1) > tr:nth-of-type(2) > td:nth-of-type(3)"
+          },
+          {
+            "kind": "xpath",
+            "xpath": "/html[1]/body[1]/table[2]/tbody[1]/tr[2]/td[3]"
+          }
+        ],
+        "fingerprint": {
+          "role": "cell",
+          "name": null,
+          "tag": "td",
+          "neighbor_text": "Share Savings"
+        },
+        "sensitive": false
+      },
+      "output": "savings_balance",
+      "parse": "decimal",
+      "pattern": null
+    }
+  ],
+  "success": {
+    "kind": "all",
+    "conditions": [
+      {
+        "kind": "url",
+        "frame": [
+          {
+            "name": "main",
+            "route": null
+          }
+        ],
+        "route": "/mbr/result?q1={{member_id}}"
+      },
+      {
+        "kind": "text",
+        "frame": [
+          {
+            "name": "main",
+            "route": null
+          }
+        ],
+        "pattern": "Member\\ Detail"
+      }
+    ]
+  },
+  "invariants": [
+    {
+      "id": "shows_member_id",
+      "description": "final screen shows the requested member_id",
+      "when": {
+        "kind": "value",
+        "target": {
+          "frame": [
+            {
+              "name": "main",
+              "route": null
+            }
+          ],
+          "strategies": [
+            {
+              "kind": "label",
+              "anchor": "Account #:",
+              "relation": "row_cell",
+              "role": null,
+              "cell_offset": 1
+            },
+            {
+              "kind": "css",
+              "selector": "body > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(2) > td:nth-of-type(2)"
+            },
+            {
+              "kind": "xpath",
+              "xpath": "/html[1]/body[1]/table[1]/tbody[1]/tr[2]/td[2]"
+            }
+          ],
+          "fingerprint": {
+            "role": "cell",
+            "name": null,
+            "tag": "td",
+            "neighbor_text": "Account #:"
+          },
+          "sensitive": false
+        },
+        "equals": {
+          "param": "member_id"
+        },
+        "pattern": null,
+        "normalize": "text"
+      }
+    }
+  ],
+  "outcomes": [],
+  "side_effects": "read",
+  "provenance": {
+    "discovery_run_id": "discovery-20261021T185517-4716e7",
+    "recorded_on_tenant": "acme",
+    "recorded_on_version": "4.2.1",
+    "recorded_at": "2026-10-21T18:55:29Z",
+    "model": "claude-sonnet-5-5",
+    "goal_template": "Look up member {member_id} and read their current savings balance",
+    "human_steps": 0
+  },
+  "review": {
+    "approved_by": null,
+    "approved_at": null,
+    "approved_hash": null,
+    "notes": ""
+  }
+}

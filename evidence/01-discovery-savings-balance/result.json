@@ -1,0 +1,13 @@
+{
+  "status": "recorded",
+  "reason": "",
+  "artifact_path": "/Users/dave/WORK/dave-github/cua-automation/capabilities/corelink.member.savings_balance/0.1.0.yaml",
+  "capability_id": "corelink.member.savings_balance",
+  "version": "0.1.0",
+  "outcome": null,
+  "steps_taken": 4,
+  "usage": {
+    "input_tokens": 27331,
+    "output_tokens": 636
+  }
+}

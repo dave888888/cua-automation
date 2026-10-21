@@ -1,0 +1,23 @@
+{
+  "run_id": "replay-20261021T185532-35846e",
+  "capability_id": "corelink.member.savings_balance",
+  "capability_version": "0.1.0",
+  "tenant": "acme",
+  "status": "blocked",
+  "outputs": {},
+  "outcome": null,
+  "failure": null,
+  "blocked": {
+    "code": "INVALID_INPUT",
+    "message": "member_id does not match ^\\d+$",
+    "step_id": null
+  },
+  "recoveries": [],
+  "drift": [],
+  "steps": [],
+  "interventions": [],
+  "warnings": [],
+  "started_at": "2026-10-21T18:55:32.946710Z",
+  "duration_ms": 0,
+  "run_dir": "/var/folders/00/bngwcd_558q3zvzw80bdy_l40000gn/T/cua-evidence-f4kp6tsp/runs/replay-20261021T185532-35846e"
+}

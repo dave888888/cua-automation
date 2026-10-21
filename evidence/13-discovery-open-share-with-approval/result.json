@@ -1,0 +1,13 @@
+{
+  "status": "recorded",
+  "reason": "",
+  "artifact_path": "/Users/dave/WORK/dave-github/cua-automation/capabilities/corelink.member.open_share/0.1.0.yaml",
+  "capability_id": "corelink.member.open_share",
+  "version": "0.1.0",
+  "outcome": null,
+  "steps_taken": 10,
+  "usage": {
+    "input_tokens": 91074,
+    "output_tokens": 1272
+  }
+}

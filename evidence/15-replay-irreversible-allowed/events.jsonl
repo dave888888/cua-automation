@@ -1,0 +1,33 @@
+{"seq": 1, "t_ms": 268, "ts": "2026-10-21T18:56:10.872+00:00", "type": "session_started", "tenant": "acme", "headed": false, "policy": "default"}
+{"seq": 2, "t_ms": 269, "ts": "2026-10-21T18:56:10.873+00:00", "type": "replay_started", "capability": "corelink.member.open_share", "version": "0.1.0", "tenant": "acme", "content_hash": "sha256:25b81230f77d9d4a23c89a63e37ab1fd", "approved": true, "overlay": [], "options": {"irreversible": "allow", "on_failure": "fail", "use_tenant_overrides": true, "escalation_timeout_s": 900, "max_interventions": 2}}
+{"seq": 3, "t_ms": 283, "ts": "2026-10-21T18:56:10.886+00:00", "type": "login_started", "route": "/login"}
+{"seq": 4, "t_ms": 395, "ts": "2026-10-21T18:56:10.998+00:00", "type": "login_ok"}
+{"seq": 5, "t_ms": 414, "ts": "2026-10-21T18:56:11.018+00:00", "type": "session_ready", "app_version": "4.2.1"}
+{"seq": 6, "t_ms": 428, "ts": "2026-10-21T18:56:11.031+00:00", "type": "step_started", "step_id": "s1", "action": "click", "intent": "Open Member Search", "risk": "read"}
+{"seq": 7, "t_ms": 493, "ts": "2026-10-21T18:56:11.097+00:00", "type": "step_ok", "step_id": "s1", "matched_by": "role"}
+{"seq": 8, "t_ms": 493, "ts": "2026-10-21T18:56:11.097+00:00", "type": "step_started", "step_id": "s2", "action": "fill", "intent": "Enter member ID", "risk": "read"}
+{"seq": 9, "t_ms": 521, "ts": "2026-10-21T18:56:11.124+00:00", "type": "step_ok", "step_id": "s2", "matched_by": "label"}
+{"seq": 10, "t_ms": 521, "ts": "2026-10-21T18:56:11.124+00:00", "type": "step_started", "step_id": "s3", "action": "click", "intent": "Search member", "risk": "read"}
+{"seq": 11, "t_ms": 824, "ts": "2026-10-21T18:56:11.428+00:00", "type": "step_ok", "step_id": "s3", "matched_by": "role"}
+{"seq": 12, "t_ms": 824, "ts": "2026-10-21T18:56:11.428+00:00", "type": "step_started", "step_id": "s4", "action": "click", "intent": "Open sub-account form", "risk": "read"}
+{"seq": 13, "t_ms": 872, "ts": "2026-10-21T18:56:11.475+00:00", "type": "step_ok", "step_id": "s4", "matched_by": "role"}
+{"seq": 14, "t_ms": 872, "ts": "2026-10-21T18:56:11.475+00:00", "type": "step_started", "step_id": "s5", "action": "select", "intent": "Choose share type", "risk": "read"}
+{"seq": 15, "t_ms": 900, "ts": "2026-10-21T18:56:11.503+00:00", "type": "step_ok", "step_id": "s5", "matched_by": "label"}
+{"seq": 16, "t_ms": 900, "ts": "2026-10-21T18:56:11.503+00:00", "type": "step_started", "step_id": "s6", "action": "fill", "intent": "Enter nickname", "risk": "read"}
+{"seq": 17, "t_ms": 914, "ts": "2026-10-21T18:56:11.518+00:00", "type": "step_ok", "step_id": "s6", "matched_by": "label"}
+{"seq": 18, "t_ms": 914, "ts": "2026-10-21T18:56:11.518+00:00", "type": "step_started", "step_id": "s7", "action": "fill", "intent": "Enter opening deposit", "risk": "read"}
+{"seq": 19, "t_ms": 929, "ts": "2026-10-21T18:56:11.532+00:00", "type": "step_ok", "step_id": "s7", "matched_by": "label"}
+{"seq": 20, "t_ms": 929, "ts": "2026-10-21T18:56:11.533+00:00", "type": "step_started", "step_id": "s8", "action": "click", "intent": "Continue to confirmation", "risk": "read"}
+{"seq": 21, "t_ms": 1244, "ts": "2026-10-21T18:56:11.847+00:00", "type": "step_ok", "step_id": "s8", "matched_by": "role"}
+{"seq": 22, "t_ms": 1244, "ts": "2026-10-21T18:56:11.847+00:00", "type": "step_started", "step_id": "s9", "action": "click", "intent": "Submit new share", "risk": "irreversible"}
+{"seq": 23, "t_ms": 1266, "ts": "2026-10-21T18:56:11.870+00:00", "type": "irreversible_authorized", "step_id": "s9", "by": "caller"}
+{"seq": 24, "t_ms": 1266, "ts": "2026-10-21T18:56:11.870+00:00", "type": "irreversible_commit", "step_id": "s9", "control": "Submit"}
+{"seq": 25, "t_ms": 1274, "ts": "2026-10-21T18:56:11.878+00:00", "type": "confirm", "step_id": "s9", "message": "Post this new share to the member record?", "handled": "accepted"}
+{"seq": 26, "t_ms": 1544, "ts": "2026-10-21T18:56:12.148+00:00", "type": "step_ok", "step_id": "s9", "matched_by": "role"}
+{"seq": 27, "t_ms": 1544, "ts": "2026-10-21T18:56:12.148+00:00", "type": "step_started", "step_id": "s10", "action": "extract", "intent": "Read confirmation number", "risk": "read"}
+{"seq": 28, "t_ms": 1567, "ts": "2026-10-21T18:56:12.171+00:00", "type": "extracted", "step_id": "s10", "output": "confirmation_number", "value": "SH-48214"}
+{"seq": 29, "t_ms": 1573, "ts": "2026-10-21T18:56:12.176+00:00", "type": "step_ok", "step_id": "s10", "matched_by": "label"}
+{"seq": 30, "t_ms": 1576, "ts": "2026-10-21T18:56:12.180+00:00", "type": "checkpoint_ok", "condition": "{'kind': 'all', 'conditions': [{'kind': 'url', 'frame': [{'name': 'main'}], 'route': '/mbr/{{member_id}}/share/commit'}, {'kind': 'text', 'frame': [{'name': 'main'}], 'pattern': 'Share\\\\ Added'}]}"}
+{"seq": 31, "t_ms": 1583, "ts": "2026-10-21T18:56:12.187+00:00", "type": "invariant_ok", "invariant": "shows_share_type"}
+{"seq": 32, "t_ms": 1587, "ts": "2026-10-21T18:56:12.190+00:00", "type": "invariant_ok", "invariant": "confirmation_number_shape"}
+{"seq": 33, "t_ms": 1587, "ts": "2026-10-21T18:56:12.190+00:00", "type": "replay_finished", "status": "success", "outcome": null, "failure": null, "blocked": null, "recoveries": 0, "drift": 0}

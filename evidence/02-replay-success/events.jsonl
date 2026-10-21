@@ -1,0 +1,17 @@
+{"seq": 1, "t_ms": 287, "ts": "2026-10-21T18:55:30.238+00:00", "type": "session_started", "tenant": "acme", "headed": false, "policy": "default"}
+{"seq": 2, "t_ms": 288, "ts": "2026-10-21T18:55:30.239+00:00", "type": "replay_started", "capability": "corelink.member.savings_balance", "version": "0.1.0", "tenant": "acme", "content_hash": "sha256:51c86640698ba879a705de1ce8680b76", "approved": false, "overlay": [], "options": {"irreversible": "deny", "on_failure": "fail", "use_tenant_overrides": true, "escalation_timeout_s": 900, "max_interventions": 2}}
+{"seq": 3, "t_ms": 303, "ts": "2026-10-21T18:55:30.254+00:00", "type": "login_started", "route": "/login"}
+{"seq": 4, "t_ms": 415, "ts": "2026-10-21T18:55:30.366+00:00", "type": "login_ok"}
+{"seq": 5, "t_ms": 435, "ts": "2026-10-21T18:55:30.386+00:00", "type": "session_ready", "app_version": "4.2.1"}
+{"seq": 6, "t_ms": 449, "ts": "2026-10-21T18:55:30.400+00:00", "type": "step_started", "step_id": "s1", "action": "click", "intent": "Open Member Search", "risk": "read"}
+{"seq": 7, "t_ms": 524, "ts": "2026-10-21T18:55:30.475+00:00", "type": "step_ok", "step_id": "s1", "matched_by": "role"}
+{"seq": 8, "t_ms": 524, "ts": "2026-10-21T18:55:30.475+00:00", "type": "step_started", "step_id": "s2", "action": "fill", "intent": "Enter member ID", "risk": "read"}
+{"seq": 9, "t_ms": 553, "ts": "2026-10-21T18:55:30.504+00:00", "type": "step_ok", "step_id": "s2", "matched_by": "label"}
+{"seq": 10, "t_ms": 553, "ts": "2026-10-21T18:55:30.504+00:00", "type": "step_started", "step_id": "s3", "action": "click", "intent": "Search", "risk": "read"}
+{"seq": 11, "t_ms": 855, "ts": "2026-10-21T18:55:30.806+00:00", "type": "step_ok", "step_id": "s3", "matched_by": "role"}
+{"seq": 12, "t_ms": 855, "ts": "2026-10-21T18:55:30.806+00:00", "type": "step_started", "step_id": "s4", "action": "extract", "intent": "Read savings balance", "risk": "read"}
+{"seq": 13, "t_ms": 879, "ts": "2026-10-21T18:55:30.830+00:00", "type": "extracted", "step_id": "s4", "output": "savings_balance", "value": "[REDACTED:output:savings_balance]"}
+{"seq": 14, "t_ms": 917, "ts": "2026-10-21T18:55:30.868+00:00", "type": "step_ok", "step_id": "s4", "matched_by": "label"}
+{"seq": 15, "t_ms": 920, "ts": "2026-10-21T18:55:30.871+00:00", "type": "checkpoint_ok", "condition": "{'kind': 'all', 'conditions': [{'kind': 'url', 'frame': [{'name': 'main'}], 'route': '/mbr/result?q1={{member_id}}'}, {'kind': 'text', 'frame': [{'name': 'main'}], 'pattern': 'Member\\\\ Detail'}]}"}
+{"seq": 16, "t_ms": 927, "ts": "2026-10-21T18:55:30.878+00:00", "type": "invariant_ok", "invariant": "shows_member_id"}
+{"seq": 17, "t_ms": 927, "ts": "2026-10-21T18:55:30.878+00:00", "type": "replay_finished", "status": "success", "outcome": null, "failure": null, "blocked": null, "recoveries": 0, "drift": 0}

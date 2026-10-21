@@ -1,0 +1,15 @@
+{"seq": 1, "t_ms": 1, "ts": "2026-10-21T18:55:46.377+00:00", "type": "faults_injected_by_harness", "faults": {"wrong_record@/mbr/result": 1}}
+{"seq": 2, "t_ms": 285, "ts": "2026-10-21T18:55:46.661+00:00", "type": "session_started", "tenant": "acme", "headed": false, "policy": "default"}
+{"seq": 3, "t_ms": 286, "ts": "2026-10-21T18:55:46.662+00:00", "type": "replay_started", "capability": "corelink.member.savings_balance", "version": "0.1.0", "tenant": "acme", "content_hash": "sha256:51c86640698ba879a705de1ce8680b76", "approved": false, "overlay": [], "options": {"irreversible": "deny", "on_failure": "fail", "use_tenant_overrides": true, "escalation_timeout_s": 900, "max_interventions": 2}}
+{"seq": 4, "t_ms": 299, "ts": "2026-10-21T18:55:46.675+00:00", "type": "login_started", "route": "/login"}
+{"seq": 5, "t_ms": 412, "ts": "2026-10-21T18:55:46.788+00:00", "type": "login_ok"}
+{"seq": 6, "t_ms": 430, "ts": "2026-10-21T18:55:46.806+00:00", "type": "session_ready", "app_version": "4.2.1"}
+{"seq": 7, "t_ms": 444, "ts": "2026-10-21T18:55:46.820+00:00", "type": "step_started", "step_id": "s1", "action": "click", "intent": "Open Member Search", "risk": "read"}
+{"seq": 8, "t_ms": 510, "ts": "2026-10-21T18:55:46.886+00:00", "type": "step_ok", "step_id": "s1", "matched_by": "role"}
+{"seq": 9, "t_ms": 510, "ts": "2026-10-21T18:55:46.886+00:00", "type": "step_started", "step_id": "s2", "action": "fill", "intent": "Enter member ID", "risk": "read"}
+{"seq": 10, "t_ms": 537, "ts": "2026-10-21T18:55:46.913+00:00", "type": "step_ok", "step_id": "s2", "matched_by": "label"}
+{"seq": 11, "t_ms": 537, "ts": "2026-10-21T18:55:46.913+00:00", "type": "step_started", "step_id": "s3", "action": "click", "intent": "Search", "risk": "read"}
+{"seq": 12, "t_ms": 843, "ts": "2026-10-21T18:55:47.219+00:00", "type": "step_ok", "step_id": "s3", "matched_by": "role"}
+{"seq": 13, "t_ms": 843, "ts": "2026-10-21T18:55:47.219+00:00", "type": "step_started", "step_id": "s4", "action": "extract", "intent": "Read savings balance", "risk": "read"}
+{"seq": 14, "t_ms": 1206, "ts": "2026-10-21T18:55:47.582+00:00", "type": "failure", "kind": "invariant_violated", "code": "RECORD_MISMATCH", "step_id": "s4", "step_intent": "Read savings balance", "expected": "{'kind': 'value', 'target': {'frame': [{'name': 'main'}], 'strategies': [{'kind': 'label', 'anchor': 'Account #:', 'relation': 'row_cell', 'cell_offset': 1}, {'kind': 'css', 'selector': 'body > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(2) > td:nth-of-type(2)'}, {'kind': 'xpath', '", "observed": "value at 'Account #:' does not show {{member_id}}", "detector": null, "evidence": ["shots/013-s4-record_mismatch.png", "dom/013-s4-record_mismatch.txt"], "hint": null}
+{"seq": 15, "t_ms": 1206, "ts": "2026-10-21T18:55:47.582+00:00", "type": "replay_finished", "status": "failed", "outcome": null, "failure": "RECORD_MISMATCH", "blocked": null, "recoveries": 0, "drift": 0}

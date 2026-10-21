@@ -1,0 +1,31 @@
+{"seq": 1, "t_ms": 0, "ts": "2026-10-21T18:56:12.236+00:00", "type": "faults_injected_by_harness", "faults": {"lost_response": 1}}
+{"seq": 2, "t_ms": 270, "ts": "2026-10-21T18:56:12.505+00:00", "type": "session_started", "tenant": "acme", "headed": false, "policy": "default"}
+{"seq": 3, "t_ms": 271, "ts": "2026-10-21T18:56:12.506+00:00", "type": "replay_started", "capability": "corelink.member.open_share", "version": "0.1.0", "tenant": "acme", "content_hash": "sha256:25b81230f77d9d4a23c89a63e37ab1fd", "approved": true, "overlay": [], "options": {"irreversible": "allow", "on_failure": "fail", "use_tenant_overrides": true, "escalation_timeout_s": 900, "max_interventions": 2}}
+{"seq": 4, "t_ms": 285, "ts": "2026-10-21T18:56:12.520+00:00", "type": "login_started", "route": "/login"}
+{"seq": 5, "t_ms": 397, "ts": "2026-10-21T18:56:12.632+00:00", "type": "login_ok"}
+{"seq": 6, "t_ms": 416, "ts": "2026-10-21T18:56:12.651+00:00", "type": "session_ready", "app_version": "4.2.1"}
+{"seq": 7, "t_ms": 429, "ts": "2026-10-21T18:56:12.665+00:00", "type": "step_started", "step_id": "s1", "action": "click", "intent": "Open Member Search", "risk": "read"}
+{"seq": 8, "t_ms": 496, "ts": "2026-10-21T18:56:12.731+00:00", "type": "step_ok", "step_id": "s1", "matched_by": "role"}
+{"seq": 9, "t_ms": 496, "ts": "2026-10-21T18:56:12.731+00:00", "type": "step_started", "step_id": "s2", "action": "fill", "intent": "Enter member ID", "risk": "read"}
+{"seq": 10, "t_ms": 523, "ts": "2026-10-21T18:56:12.759+00:00", "type": "step_ok", "step_id": "s2", "matched_by": "label"}
+{"seq": 11, "t_ms": 523, "ts": "2026-10-21T18:56:12.759+00:00", "type": "step_started", "step_id": "s3", "action": "click", "intent": "Search member", "risk": "read"}
+{"seq": 12, "t_ms": 830, "ts": "2026-10-21T18:56:13.066+00:00", "type": "step_ok", "step_id": "s3", "matched_by": "role"}
+{"seq": 13, "t_ms": 830, "ts": "2026-10-21T18:56:13.066+00:00", "type": "step_started", "step_id": "s4", "action": "click", "intent": "Open sub-account form", "risk": "read"}
+{"seq": 14, "t_ms": 891, "ts": "2026-10-21T18:56:13.126+00:00", "type": "step_ok", "step_id": "s4", "matched_by": "role"}
+{"seq": 15, "t_ms": 891, "ts": "2026-10-21T18:56:13.126+00:00", "type": "step_started", "step_id": "s5", "action": "select", "intent": "Choose share type", "risk": "read"}
+{"seq": 16, "t_ms": 918, "ts": "2026-10-21T18:56:13.153+00:00", "type": "step_ok", "step_id": "s5", "matched_by": "label"}
+{"seq": 17, "t_ms": 918, "ts": "2026-10-21T18:56:13.153+00:00", "type": "step_started", "step_id": "s6", "action": "fill", "intent": "Enter nickname", "risk": "read"}
+{"seq": 18, "t_ms": 932, "ts": "2026-10-21T18:56:13.167+00:00", "type": "step_ok", "step_id": "s6", "matched_by": "label"}
+{"seq": 19, "t_ms": 932, "ts": "2026-10-21T18:56:13.167+00:00", "type": "step_started", "step_id": "s7", "action": "fill", "intent": "Enter opening deposit", "risk": "read"}
+{"seq": 20, "t_ms": 946, "ts": "2026-10-21T18:56:13.181+00:00", "type": "step_ok", "step_id": "s7", "matched_by": "label"}
+{"seq": 21, "t_ms": 946, "ts": "2026-10-21T18:56:13.181+00:00", "type": "step_started", "step_id": "s8", "action": "click", "intent": "Continue to confirmation", "risk": "read"}
+{"seq": 22, "t_ms": 1247, "ts": "2026-10-21T18:56:13.482+00:00", "type": "step_ok", "step_id": "s8", "matched_by": "role"}
+{"seq": 23, "t_ms": 1247, "ts": "2026-10-21T18:56:13.483+00:00", "type": "step_started", "step_id": "s9", "action": "click", "intent": "Submit new share", "risk": "irreversible"}
+{"seq": 24, "t_ms": 1264, "ts": "2026-10-21T18:56:13.500+00:00", "type": "irreversible_authorized", "step_id": "s9", "by": "caller"}
+{"seq": 25, "t_ms": 1264, "ts": "2026-10-21T18:56:13.500+00:00", "type": "irreversible_commit", "step_id": "s9", "control": "Submit"}
+{"seq": 26, "t_ms": 1277, "ts": "2026-10-21T18:56:13.512+00:00", "type": "confirm", "step_id": "s9", "message": "Post this new share to the member record?", "handled": "accepted"}
+{"seq": 27, "t_ms": 1544, "ts": "2026-10-21T18:56:13.780+00:00", "type": "step_ok", "step_id": "s9", "matched_by": "role"}
+{"seq": 28, "t_ms": 1544, "ts": "2026-10-21T18:56:13.780+00:00", "type": "step_started", "step_id": "s10", "action": "extract", "intent": "Read confirmation number", "risk": "read"}
+{"seq": 29, "t_ms": 1550, "ts": "2026-10-21T18:56:13.785+00:00", "type": "detector_hit", "step_id": "s10", "detector": "processor_unavailable", "code": "APP_ERROR_TRANSIENT", "classification": "recoverable", "message": null}
+{"seq": 30, "t_ms": 1590, "ts": "2026-10-21T18:56:13.825+00:00", "type": "failure", "kind": "in_doubt", "code": "APP_ERROR_TRANSIENT", "step_id": "s10", "step_intent": "Read confirmation number", "expected": null, "observed": "APP_ERROR_TRANSIENT after an irreversible step; not retrying", "detector": "processor_unavailable", "evidence": ["shots/029-s10-app_error_transient.png", "dom/029-s10-app_error_transient.txt"], "hint": "verify in the app whether the transaction posted"}
+{"seq": 31, "t_ms": 1590, "ts": "2026-10-21T18:56:13.826+00:00", "type": "replay_finished", "status": "failed", "outcome": null, "failure": "APP_ERROR_TRANSIENT", "blocked": null, "recoveries": 0, "drift": 0}

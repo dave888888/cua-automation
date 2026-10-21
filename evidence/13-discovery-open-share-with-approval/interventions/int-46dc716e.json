@@ -1,0 +1,42 @@
+{
+  "id": "int-46dc716e",
+  "run_id": "discovery-20261021T185547-fbd090",
+  "session_id": "discovery-20261021T185547-fbd090",
+  "epoch": 1,
+  "kind": "approval",
+  "subject": "discovery: Open a new {share_type} sub-account named {nickname} with an opening deposit of {opening_deposit} for member {member_id}, submit it, and read the confirmation number",
+  "step_id": null,
+  "step_intent": null,
+  "code": "IRREVERSIBLE_STEP",
+  "reason": "The agent wants to click 'Submit' (Submit new share). This commits a change.",
+  "screenshot": "shots/039-escalation-irreversible_step.png",
+  "frames": {
+    "top": "/desk",
+    "banner": "/banner",
+    "nav": "/nav",
+    "main": "/mbr/[REDACTED:field:member]/share/review"
+  },
+  "allowed_decisions": [
+    "approve",
+    "deny",
+    "abort"
+  ],
+  "in_flight_unaccounted": false,
+  "created_at": "2026-10-21T18:56:05.064416Z",
+  "status": "resolved",
+  "claimed_by": "ops.jdoe",
+  "claimed_at": "2026-10-21T18:56:05.070142Z",
+  "rejected_resumes": [],
+  "unclaimed_activity": 0,
+  "resolution": {
+    "decision": "approve",
+    "note": "sandbox approval",
+    "by": "ops.jdoe",
+    "at": "2026-10-21T18:56:05.071063Z",
+    "human_actions": [],
+    "timed_out": false,
+    "resumed": true,
+    "checkpoint": "unchanged-screen",
+    "verification_detail": ""
+  }
+}
